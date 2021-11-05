@@ -19,7 +19,6 @@ const MovieList = (props)=> {
                     <th></th>
                 </tr>
                 </thead>
-
                 <tbody>
                     {
                         movies.map(movie=><MovieListItem key={movie.id} movie={movie}/>)
@@ -34,7 +33,7 @@ const MovieList = (props)=> {
 
 const mapStateToProps = (state) => {
     return {
-      movies: state.movies
+      movies: state.movieReducer.movies
     }
   }
 

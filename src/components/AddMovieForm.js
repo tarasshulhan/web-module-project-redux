@@ -4,10 +4,12 @@ import { connect } from 'react-redux';
 
 import { Link, useHistory } from 'react-router-dom';
 
+
 const AddMovieForm = (props) => {
     const { push } = useHistory();
 
     const [movie, setMovie] = useState({
+        id: props.movies.length,
         title: "",
         director: "",
         genre: "",
@@ -23,6 +25,8 @@ const AddMovieForm = (props) => {
     }
 
     const handleSubmit = (e) => {
+        props.addMovie(movie);
+        push('/movies/')
     }
 
     const { title, director, genre, metascore, description } = movie;
@@ -66,5 +70,9 @@ const AddMovieForm = (props) => {
         </div>
     </div>);
 }
-
-export default AddMovieForm;
+const mapStateToProps = (state) => {
+    return {
+    movies: state.movieReducer.movies
+    }
+  }
+export default  connect(mapStateToProps, {addMovie})(AddMovieForm);
